@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-8+8t_l6&hm&pgj*fu*5jsup7cz!@psc7e0@=-_=en0v+)z!lk&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 
 
 # Application definition
@@ -78,12 +78,18 @@ WSGI_APPLICATION = "company.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'URL': "postgresql://postgres:bzrGJVYtm6nQUMiU6dDf@containers-us-west-49.railway.app:5935/railway",
+        'NAME': "railway",
+        'USER': "postgres",
+        'PASSWORD': "bzrGJVYtm6nQUMiU6dDf",
+        'HOST': "containers-us-west-49.railway.app",
+        'PORT': "5935",
     }
 }
 
+print(os.getenv('POSTGRES_URL'))
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
